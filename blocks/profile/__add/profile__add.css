@@ -2,14 +2,12 @@
     width: 150px;
     height: 50px;
     background-color: black;
-    border: 2px solid white;
     background-position: center;
     background-image: url(../../../images/profile/Vector.svg);
     padding: 0;
     margin-left: auto;
     background-repeat: no-repeat;
     border: 3px solid white;
-    background-position: center;
     border-radius: 2px;
 }
 
