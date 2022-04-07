@@ -1,6 +1,6 @@
 .popup__save {
     height: 50px;
-    margin: 48px 36px 37px;
+    margin-top: 48px;
     padding: 0;
     border: none;
     border-radius: 2px;
@@ -13,12 +13,12 @@
 }
 
 .popup__save:hover {
-    opacity: 50%;
+    opacity: 80%;
 }
 
 @media screen and (max-width: 400px) {
-    .popup__user-about {
-        margin: 45px 22px 25px;
+    .popup__save {
+        margin-top: 45px;
         font-size: 14px;
     }
 }

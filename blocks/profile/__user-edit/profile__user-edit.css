@@ -1,21 +1,21 @@
-.user__edit {
+.profile__user-edit {
     grid-area: edit;
     width: 24px;
     height: 24px;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0);
     border: none;
     background-image: url(../../../images/profile/Edit\ Button.svg);
     background-size: contain;
     padding: 0;
 }
 
-.user__edit:hover {
+.profile__user-edit:hover {
     cursor: pointer;
-    opacity: 50%;
+    opacity: 60%;
 }
 
 @media screen and (max-width: 370px) {
-    .user__edit {
+    .profile__user-edit {
         width: 18px;
         height: 18px;
     }

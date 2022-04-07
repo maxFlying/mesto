@@ -1,29 +1,34 @@
 // Переменные
 
-let nameUser = document.querySelector('.user__name');
-let jobUser = document.querySelector('.user__info');
-let editUser = document.querySelector('.user__edit');
+let nameUser = document.querySelector('.profile__user-name');
+let jobUser = document.querySelector('.profile__user-info');
+let editUser = document.querySelector('.profile__user-edit');
 
 let popup = document.querySelector('.popup');
 let popupCloseButton = document.querySelector('.popup__close');
 let popupSaveButton = document.querySelector('.popup__save');
 let popupContainer = document.querySelector('.popup__container');
-let nameInput = popupContainer.querySelector('.popup__user-name');
-let jobInput = popupContainer.querySelector('.popup__user-about');
+let nameInput = popupContainer.querySelector('.poput__input_name');
+let jobInput = popupContainer.querySelector('.poput__input_about');
 
-// Заполение инпутов
+// Открытие попапа
 
-nameInput.value = nameUser.textContent
-jobInput.value = jobUser.textContent
-
-// Открытие и закрытие попапа
-
-function togglePopup() {
-    popup.classList.toggle('popup_is-active');
+function openPopup() {
+    popup.classList.add('popup_is-active');
+    
+    nameInput.value = nameUser.textContent
+    jobInput.value = jobUser.textContent
 }
 
-editUser.addEventListener('click', togglePopup);
-popupCloseButton.addEventListener('click', togglePopup);
+editUser.addEventListener('click', openPopup);
+
+// Закрытие попапа
+
+function closePopup() {
+    popup.classList.remove('popup_is-active');
+}
+
+popupCloseButton.addEventListener('click', closePopup);
 
 // Редактирование информации о пользователе
 
@@ -34,7 +39,7 @@ function formSubmitHandler (evt) {
     nameUser.textContent = nameInput.value;
     jobUser.textContent = jobInput.value;
 
-    togglePopup();
+    closePopup();
 }
 
 popupContainer.addEventListener('submit', formSubmitHandler);

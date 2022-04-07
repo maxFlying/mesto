@@ -1,9 +1,7 @@
 .photoalbum__description {
     z-index: 2;
-    min-height: 80px;
     display: flex;
-    padding-left: 21px;
-    padding-right: 15px;
+    padding: 25px 15px 31px 21px;
     justify-content: space-between;
     align-items: center;
     background-image: url(../../../images/photolbum/background.jpg);
