@@ -8,8 +8,8 @@ let popup = document.querySelector('.popup');
 let popupCloseButton = document.querySelector('.popup__close');
 let popupSaveButton = document.querySelector('.popup__save');
 let popupContainer = document.querySelector('.popup__container');
-let nameInput = popupContainer.querySelector('.poput__input_name');
-let jobInput = popupContainer.querySelector('.poput__input_about');
+let nameInput = popupContainer.querySelector('.popup__input_type_name');
+let jobInput = popupContainer.querySelector('.popup__input_type_about');
 
 // Открытие попапа
 
