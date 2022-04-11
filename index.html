@@ -26,50 +26,7 @@
         </section>
         
         <section class="photogrid">
-            <ul class="photogrid__list">
-                <li class="photoalbum">
-                    <img src="./images/photolbum/elbrus.jpg" alt="Эльбрус" class="photoalbum__image">
-                    <div class="photoalbum__description">
-                        <h2 class="photoalbum__title">Эльбрус</h2>
-                        <button class="photoalbum__like" type="button"></button>
-                    </div>
-                </li>
-                <li class="photoalbum">
-                    <img src="./images/photolbum/altay.jpg" alt="Алтай" class="photoalbum__image">
-                    <div class="photoalbum__description">
-                        <h2 class="photoalbum__title">Алтай</h2>
-                        <button class="photoalbum__like" type="button"></button>
-                    </div>
-                </li>
-                <li class="photoalbum">
-                    <img src="./images/photolbum/kamchatka.jpg" alt="Камчатка" class="photoalbum__image">
-                    <div class="photoalbum__description">
-                        <h2 class="photoalbum__title">Камчатка</h2>
-                        <button class="photoalbum__like" type="button"></button>
-                    </div>
-                </li>
-                <li class="photoalbum">
-                    <img src="./images/photolbum/sulak.jpg" alt="Сулакский каньон" class="photoalbum__image">
-                    <div class="photoalbum__description">
-                        <h2 class="photoalbum__title">Сулакский каньон</h2>
-                        <button class="photoalbum__like" type="button"></button>
-                    </div>
-                </li>
-                <li class="photoalbum">
-                    <img src="./images/photolbum/baikal.jpg" alt="Байкал" class="photoalbum__image">
-                    <div class="photoalbum__description">
-                        <h2 class="photoalbum__title">Байкал</h2>
-                        <button class="photoalbum__like" type="button"></button>
-                    </div>
-                </li>
-                <li class="photoalbum">
-                    <img src="./images/photolbum/kurshkaya_kosa.jpg" alt="Куршская коса" class="photoalbum__image">
-                    <div class="photoalbum__description">
-                        <h2 class="photoalbum__title">Куршская коса</h2>
-                        <button class="photoalbum__like" type="button"></button>
-                    </div>
-                </li>
-            </ul>
+            <ul class="photogrid__list"></ul>
         </section>
     </main>
 
@@ -84,10 +41,42 @@
                 <h3 class="popup__title">Редактировать профиль</h3>
                 <input type="text" class="popup__input popup__input_type_name" name="input_name" placeholder="Имя">
                 <input type="text" class="popup__input popup__input_type_about" name="input_about" placeholder="Род деятельности">
-                <button class="popup__save" type="submit">Сохранить</button>
+                <button class="popup__button" type="submit">Сохранить</button>
             </form>
         </div>
     </div>
+
+    <div class="popup popup_mesto">
+        <div class="popup__container">
+            <button class="popup__close popup__close_mesto" type="button"></button>
+            <form class="popup__form" name="popup__form">
+                <h3 class="popup__title">Новое место</h3>
+                <input type="text" class="popup__input popup__input_type_title" name="input_title" placeholder="Название">
+                <input type="text" class="popup__input popup__input_type_link" name="input_link" placeholder="Ссылка на картинку">
+                <button class="popup__button popup__button_create" type="submit">Создать</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="popup popup_photoalbum">
+        <div class="popup__photoalbum-container">
+            <button class="popup__close popup__close_photoalbum" type="button"></button>
+            <img class="popup__photoalbum-image">
+            <h3 class="popup__photoalbum-title"></h3> 
+        </div>
+    </div>
+
+
+    <template class="template__photoalbum">
+        <li class="photoalbum">
+            <button class="photoalbum__delete" type="button"></button>
+            <img class="photoalbum__image">
+            <div class="photoalbum__description">
+                <h2 class="photoalbum__title"></h2>
+                <button class="photoalbum__like" type="button"></button>
+            </div>
+        </li>
+    </template>
 
     <script src="./scripts/index.js"></script>
 </body>
