@@ -31,3 +31,4 @@
 @import url(../blocks/popup/__photoalbum-container/popup__photoalbum-container.css);
 @import url(../blocks/popup/__photoalbum-image/popup__photoalbum-image.css);
 @import url(../blocks/popup/__photoalbum-title/popup__photoalbum-title.css);
+@import url(../blocks/popup/_opacity_dark/popup_opacity_dark.css);
