@@ -160,7 +160,7 @@ function getElement(item) {
 
         popupPhotoTitle.textContent = item.name;
         
-        popupPhoto.classList.add('popup_is-active');
+        openPopup(popupPhoto);
     });
     
     return getElementTemplate;
