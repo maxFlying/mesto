@@ -31,26 +31,34 @@ const popupPhotoCloseButton = document.querySelector('.popup__close_photoalbum')
 const popupPhotoImage = document.querySelector('.popup__photoalbum-image');
 const popupPhotoTitle = document.querySelector('.popup__photoalbum-title');
 
+const popupList = Array.from(document.querySelectorAll('.popup'));
+const inputList = Array.from(document.querySelectorAll('.popup__input'));
+
 //--------------------------------------------//
 
 function openPopup(popup) {
-
     popup.classList.add('popup_is-active');
 }
 
-function openPopupProfile() { 
+function openPopupProfile() {
+    
     nameInput.value = nameUser.textContent;
     jobInput.value = jobUser.textContent;
+
+    toggleButton(inputList, popupMestoButton, configs);
     
     openPopup(popupProfile);
-} 
+}
 
-function openPopupMesto() { 
+function openPopupMesto() {
     titleInput.value = '';
     linkInput.value = '';
-    
+
+    toggleButton(inputList, popupMestoButton, configs);
+
     openPopup(popupMesto);
-} 
+    
+}
 
 editUser.addEventListener('click', openPopupProfile);
 addMesto.addEventListener('click', openPopupMesto);
@@ -167,3 +175,30 @@ function getElement(item) {
 }
 
 render();
+
+//--------------------------------------------//
+
+function closePopupEsc() {
+  popupList.map(function (popup) {
+    document.addEventListener('keydown', function(evt) {
+      if (evt.key === "Escape" && popup.classList.contains('popup_is-active'))  {
+        closePopup(popup);
+        console.log('áfdas')
+  }});
+});
+};
+
+closePopupEsc()
+
+function closePopupOverlay() {
+  popupList.map(function (popup) {
+    popup.addEventListener('click', (evt) => {
+      if (evt.target === evt.currentTarget && popup.classList.contains('popup_is-active')) {
+        closePopup(evt.currentTarget);
+        console.log('adawdawda')
+      };
+    });
+  });
+};
+
+closePopupOverlay()
