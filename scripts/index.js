@@ -9,7 +9,6 @@ const addMesto = document.querySelector('.profile__add');
 // Попап Профиль
 
 const popupProfile = document.querySelector('.popup_profile');
-const popupProfileCloseButton = document.querySelector('.popup__close_profile');
 const popupProfileButton = document.querySelector('.popup__button_profile');
 const popupProfileForm = document.querySelector('.popup__form_profile')
 const nameInput = document.querySelector('.popup__input_type_name');
@@ -19,7 +18,6 @@ const jobInput = document.querySelector('.popup__input_type_about');
 
 const popupMesto = document.querySelector('.popup_mesto');
 const popupMestoButton = document.querySelector('.popup__button_create');
-const popupMestoCloseButton = document.querySelector('.popup__close_mesto');
 const popupMestoForm = document.querySelector('.popup__form_mesto');
 const titleInput = document.querySelector('.popup__input_type_title');
 const linkInput = document.querySelector('.popup__input_type_link');
@@ -27,9 +25,10 @@ const linkInput = document.querySelector('.popup__input_type_link');
 //Попап Фотоальбом
 
 const popupPhoto = document.querySelector('.popup_photoalbum');
-const popupPhotoCloseButton = document.querySelector('.popup__close_photoalbum');
 const popupPhotoImage = document.querySelector('.popup__photoalbum-image');
 const popupPhotoTitle = document.querySelector('.popup__photoalbum-title');
+
+//--------------------------------------------//
 
 const popupList = Array.from(document.querySelectorAll('.popup'));
 const inputList = Array.from(document.querySelectorAll('.popup__input'));
@@ -38,6 +37,7 @@ const inputList = Array.from(document.querySelectorAll('.popup__input'));
 
 function openPopup(popup) {
     popup.classList.add('popup_is-active');
+    document.addEventListener('keydown', closePopupEsc); 
 }
 
 function openPopupProfile() {
@@ -51,8 +51,7 @@ function openPopupProfile() {
 }
 
 function openPopupMesto() {
-    titleInput.value = '';
-    linkInput.value = '';
+    popupMestoForm.reset()
 
     toggleButton(inputList, popupMestoButton, configs);
 
@@ -67,15 +66,30 @@ addMesto.addEventListener('click', openPopupMesto);
 
 function closePopup(popup) {
     popup.classList.remove('popup_is-active');
+    document.removeEventListener('keydown', closePopupEsc); 
 }
 
-popupProfileCloseButton.addEventListener('click', () => closePopup(popupProfile));
-popupMestoCloseButton.addEventListener('click', () => closePopup(popupMesto));
-popupPhotoCloseButton.addEventListener('click', () => closePopup(popupPhoto));
+popupList.forEach((popup) => {
+    popup.addEventListener('mousedown', (evt) => {
+        if (evt.target.classList.contains('popup_is-active')) {
+            closePopup(popup)
+        }
+        if (evt.target.classList.contains('popup__close')) {
+          closePopup(popup)
+        }
+    });
+});
+
+function closePopupEsc(evt) {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_is-active');
+    closePopup(openedPopup);
+  }
+};
 
 //--------------------------------------------//
 
-function formSubmitHandler (evt) {
+function handleProfileFormSubmit (evt) {
     
     evt.preventDefault();
 
@@ -85,7 +99,7 @@ function formSubmitHandler (evt) {
     closePopup(popupProfile);
 }
 
-popupProfileForm.addEventListener('submit', formSubmitHandler);
+popupProfileForm.addEventListener('submit', handleProfileFormSubmit);
 
 
 function createNewPhoto(evt) {
@@ -161,7 +175,7 @@ function getElement(item) {
     });
 
     //Попап Фото
-    getElementTemplate.querySelector('.photoalbum__image').addEventListener('click', function() {
+    link.addEventListener('click', function() {
         
         popupPhotoImage.src = item.link;
         popupPhotoImage.alt = item.name;
@@ -175,30 +189,3 @@ function getElement(item) {
 }
 
 render();
-
-//--------------------------------------------//
-
-function closePopupEsc() {
-  popupList.map(function (popup) {
-    document.addEventListener('keydown', function(evt) {
-      if (evt.key === "Escape" && popup.classList.contains('popup_is-active'))  {
-        closePopup(popup);
-        console.log('áfdas')
-  }});
-});
-};
-
-closePopupEsc()
-
-function closePopupOverlay() {
-  popupList.map(function (popup) {
-    popup.addEventListener('click', (evt) => {
-      if (evt.target === evt.currentTarget && popup.classList.contains('popup_is-active')) {
-        closePopup(evt.currentTarget);
-        console.log('adawdawda')
-      };
-    });
-  });
-};
-
-closePopupOverlay()
