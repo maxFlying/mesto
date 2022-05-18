@@ -22,12 +22,6 @@ const popupMestoForm = document.querySelector('.popup__form_mesto');
 const titleInput = document.querySelector('.popup__input_type_title');
 const linkInput = document.querySelector('.popup__input_type_link');
 
-//Попап Фотоальбом
-
-const popupPhoto = document.querySelector('.popup_photoalbum');
-const popupPhotoImage = document.querySelector('.popup__photoalbum-image');
-const popupPhotoTitle = document.querySelector('.popup__photoalbum-title');
-
 //--------------------------------------------//
 
 const popupList = Array.from(document.querySelectorAll('.popup'));
@@ -45,7 +39,7 @@ function openPopupProfile() {
     nameInput.value = nameUser.textContent;
     jobInput.value = jobUser.textContent;
 
-    toggleButton(inputList, popupMestoButton, configs);
+    editProfileValidator.toggleButton(popupProfileButton);
     
     openPopup(popupProfile);
 }
@@ -53,7 +47,7 @@ function openPopupProfile() {
 function openPopupMesto() {
     popupMestoForm.reset()
 
-    toggleButton(inputList, popupMestoButton, configs);
+    newMestoValidator.toggleButton(popupMestoButton);
 
     openPopup(popupMesto);
     
@@ -106,8 +100,10 @@ function createNewPhoto(evt) {
 
     evt.preventDefault();
 
-    const initialCardsNewTitle = getElement({name: titleInput.value, link: linkInput.value})
-    photoContainer.prepend(initialCardsNewTitle);
+      const card = new Card({name: titleInput.value, link: linkInput.value}, templatePhoto);
+      const cardElement = card.generateCard();
+    
+      photoContainer.prepend(cardElement);
 
     closePopup(popupMesto);
 }
@@ -116,7 +112,7 @@ popupMestoForm.addEventListener('submit', createNewPhoto);
 
 //--------------------------------------------//
 
-// Добавление карточек на страницу через template
+import { Card } from "./Card.js";
 
 const initialCards = [
     {
@@ -148,44 +144,27 @@ const initialCards = [
 const photoContainer = document.querySelector('.photogrid__list');
 const templatePhoto = document.querySelector('.template__photoalbum');
 
-function render() {
-    const photogrid = initialCards.map(getElement);
-    photoContainer.append(...photogrid);
+initialCards.forEach((item) => {
+  const card = new Card(item, templatePhoto);
+  const cardElement = card.generateCard();
+
+
+  photoContainer.append(cardElement);
+});
+
+import { FormValidator } from "./FormValidator.js";
+
+const configs = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_active'
 }
 
-function getElement(item) {
-    const getElementTemplate = templatePhoto.content.cloneNode(true);
-    
-    const name = getElementTemplate.querySelector('.photoalbum__title');
-    name.textContent = item.name;
-    
-    const link = getElementTemplate.querySelector('.photoalbum__image');
-    link.src = item.link;
-    link.alt = item.name;
+const editProfileValidator = new FormValidator(configs, popupProfileForm);
+editProfileValidator.enableValidation();
 
-    // Лайк
-    getElementTemplate.querySelector('.photoalbum__like').addEventListener('click', function(evt) {
-        evt.target.classList.toggle('photoalbum__like_is-active');
-    });
-
-    //Удаление карточки
-    getElementTemplate.querySelector('.photoalbum__delete').addEventListener('click', function(evt) {
-        const element = evt.target.closest('.photoalbum');
-        element.remove();
-    });
-
-    //Попап Фото
-    link.addEventListener('click', function() {
-        
-        popupPhotoImage.src = item.link;
-        popupPhotoImage.alt = item.name;
-
-        popupPhotoTitle.textContent = item.name;
-        
-        openPopup(popupPhoto);
-    });
-    
-    return getElementTemplate;
-}
-
-render();
+const newMestoValidator = new FormValidator(configs, popupMestoForm);
+newMestoValidator.enableValidation();
