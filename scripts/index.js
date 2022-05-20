@@ -1,3 +1,6 @@
+import { FormValidator } from "./FormValidator.js";
+import { Card } from "./Card.js";
+
 // Из блока profile
 
 const nameUser = document.querySelector('.profile__user-name');
@@ -9,7 +12,6 @@ const addMesto = document.querySelector('.profile__add');
 // Попап Профиль
 
 const popupProfile = document.querySelector('.popup_profile');
-const popupProfileButton = document.querySelector('.popup__button_profile');
 const popupProfileForm = document.querySelector('.popup__form_profile')
 const nameInput = document.querySelector('.popup__input_type_name');
 const jobInput = document.querySelector('.popup__input_type_about');
@@ -17,7 +19,6 @@ const jobInput = document.querySelector('.popup__input_type_about');
 // Попап Новое место
 
 const popupMesto = document.querySelector('.popup_mesto');
-const popupMestoButton = document.querySelector('.popup__button_create');
 const popupMestoForm = document.querySelector('.popup__form_mesto');
 const titleInput = document.querySelector('.popup__input_type_title');
 const linkInput = document.querySelector('.popup__input_type_link');
@@ -25,11 +26,12 @@ const linkInput = document.querySelector('.popup__input_type_link');
 //--------------------------------------------//
 
 const popupList = Array.from(document.querySelectorAll('.popup'));
-const inputList = Array.from(document.querySelectorAll('.popup__input'));
+const photoContainer = document.querySelector('.photogrid__list');
+const templatePhoto = document.querySelector('.template__photoalbum');
 
 //--------------------------------------------//
 
-function openPopup(popup) {
+export function openPopup(popup) {
     popup.classList.add('popup_is-active');
     document.addEventListener('keydown', closePopupEsc); 
 }
@@ -39,7 +41,7 @@ function openPopupProfile() {
     nameInput.value = nameUser.textContent;
     jobInput.value = jobUser.textContent;
 
-    editProfileValidator.toggleButton(popupProfileButton);
+    editProfileValidator.toggleButton();
     
     openPopup(popupProfile);
 }
@@ -47,7 +49,7 @@ function openPopupProfile() {
 function openPopupMesto() {
     popupMestoForm.reset()
 
-    newMestoValidator.toggleButton(popupMestoButton);
+    newMestoValidator.toggleButton();
 
     openPopup(popupMesto);
     
@@ -99,11 +101,8 @@ popupProfileForm.addEventListener('submit', handleProfileFormSubmit);
 function createNewPhoto(evt) {
 
     evt.preventDefault();
-
-      const card = new Card({name: titleInput.value, link: linkInput.value}, templatePhoto);
-      const cardElement = card.generateCard();
     
-      photoContainer.prepend(cardElement);
+    photoContainer.prepend(addNewCard({name: titleInput.value, link: linkInput.value}, templatePhoto));
 
     closePopup(popupMesto);
 }
@@ -111,8 +110,6 @@ function createNewPhoto(evt) {
 popupMestoForm.addEventListener('submit', createNewPhoto);
 
 //--------------------------------------------//
-
-import { Card } from "./Card.js";
 
 const initialCards = [
     {
@@ -141,18 +138,15 @@ const initialCards = [
     }
 ];
 
-const photoContainer = document.querySelector('.photogrid__list');
-const templatePhoto = document.querySelector('.template__photoalbum');
+function addNewCard(arrayItem, template) {
+  const card = new Card(arrayItem, template);
+  const cardElement = card.generateCard();
+  return cardElement;
+}
 
 initialCards.forEach((item) => {
-  const card = new Card(item, templatePhoto);
-  const cardElement = card.generateCard();
-
-
-  photoContainer.append(cardElement);
+  photoContainer.append(addNewCard(item, templatePhoto));
 });
-
-import { FormValidator } from "./FormValidator.js";
 
 const configs = {
   formSelector: '.popup__form',

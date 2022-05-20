@@ -1,26 +1,4 @@
-// class Card222 {
-//     constructor(data, templateSelector) {
-//         this._name = data.name;
-//         this._link = data.link;
-//         this._templateSelector = templateSelector;
-//     }
-
-//     getElement() {
-//         this._element = this._templateSelector.content.cloneNode(true).querySelector('.photoalbum');
-        
-//         this._element.querySelector('.photoalbum__title').textContent = this._name;
-//         this._element.querySelector('.photoalbum__image').link = this._link;
-//         this._element.querySelector('.photoalbum__image').alt = this._name;
-
-//         this._element.querySelector('.photoalbum__like').addEventListener('click', (evt) => {
-//             evt.target.classList.toggle('photoalbum__like_is-active');
-//         });
-
-//         this._element.querySelector('.photoalbum__delete').addEventListener('click', (evt) => {
-//             evt.target.closest('.photoalbum').remove();
-//         });
-//     }
-// }
+import { openPopup } from "./index.js";
 
 const popupPhotoImage = document.querySelector('.popup__photoalbum-image');
 const popupPhotoTitle = document.querySelector('.popup__photoalbum-title');
@@ -45,9 +23,9 @@ export class Card {
     }
 
     _getTemplate() {
-        const CardElement = this._templateSelector.content.querySelector('.photoalbum').cloneNode(true);
+        const сardElement = this._templateSelector.content.querySelector('.photoalbum').cloneNode(true);
         
-        return CardElement;
+        return сardElement;
     }
 
     _setEventListeners() {
@@ -69,17 +47,15 @@ export class Card {
         popupPhotoImage.alt = this._title;
         popupPhotoTitle.textContent = this._title;
         
-        popupPhoto.classList.add('popup_is-active');
-
-        
+        openPopup(popupPhoto);
     }
 
     _toggleLikeButton(evt) {
         evt.target.classList.toggle('photoalbum__like_is-active');
     }
 
-    _deleteCard(evt) {
-        evt.target.closest('.photoalbum').remove();
+    _deleteCard() {
+        this._element.remove()
     }
 
 }
