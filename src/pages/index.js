@@ -28,7 +28,7 @@ import {
   configs
 } from '../utils/constants.js';
 
-import './pages/index.css'
+import './index.css'
 
 
 function openPopup(popupSelector) {
