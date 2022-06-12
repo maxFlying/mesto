@@ -5,7 +5,7 @@
     margin: 0;
     border: none;
     background-color: rgba(0, 0, 0, 0);
-    background-image: url(../../../images/popup/Close\ Icon.svg);
+    background-image: url(../../../images/popup/closeIcon.svg);
     background-repeat: no-repeat;
     background-size: cover;
     position: absolute;

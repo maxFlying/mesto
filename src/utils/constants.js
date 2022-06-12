@@ -1,6 +1,9 @@
 export const popupPhotoImage = document.querySelector(".popup__photoalbum-image");
 export const popupPhotoTitle = document.querySelector(".popup__photoalbum-title");
-export const popupPhoto = document.querySelector(".popup_photoalbum");
+
+export const popupPhoto = ".popup_photoalbum";
+export const popupProfile = ".popup_profile";
+export const popupMesto = ".popup_mesto";
 
 export const nameInput = document.querySelector(".popup__input_type_name");
 export const jobInput = document.querySelector(".popup__input_type_about");
@@ -17,15 +20,13 @@ export const jobUser = document.querySelector(".profile__user-info");
 export const editUser = document.querySelector(".profile__user-edit");
 export const addMesto = document.querySelector(".profile__add");
 
-export const popupProfile = document.querySelector(".popup_profile");
+
 export const popupProfileForm = document.querySelector(".popup__form_profile");
 
-export const popupMesto = document.querySelector(".popup_mesto");
 export const popupMestoForm = document.querySelector(".popup__form_mesto");
 export const titleInput = document.querySelector(".popup__input_type_title");
 export const linkInput = document.querySelector(".popup__input_type_link");
 
-// export const photoContainer = document.querySelector('.photogrid__list'); ???????????
 export const templatePhoto = document.querySelector(".template__photoalbum");
 
 export const initialCards = [

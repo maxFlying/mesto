@@ -1,7 +1,6 @@
 import { FormValidator } from "../components/FormValidator.js";
 import { Card } from "../components/Card.js";
 import { Section } from "../components/Section.js";
-import { Popup } from "../components/Popup.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
 import { UserInfo } from "../components/UserInfo.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
@@ -30,18 +29,6 @@ import {
 
 import './index.css'
 
-
-function openPopup(popupSelector) {
-  const popupClass = new Popup (popupSelector);
-  popupClass.open();
-  popupClass.setEventListeners();
-}
-
-// function closePopup(popupSelector) {
-//   const popupClass = new Popup (popupSelector);
-//   popupClass.close();
-// }
-
 //--------------------------------------------//
 
 const profileInfo = new UserInfo({userName: nameUser, userJob: jobUser});
@@ -53,17 +40,19 @@ const profileFormSubmit = new PopupWithForm(popupProfile, {
 })
 
 function openPopupProfile() {
-  nameInput.value = profileInfo.getUserInfo().name;
-  jobInput.value = profileInfo.getUserInfo().job;
+  const UserInfo = profileInfo.getUserInfo()
+  nameInput.value = UserInfo.name;
+  jobInput.value = UserInfo.job;
 
   editProfileValidator.toggleButton();
-  
-  openPopup(popupProfile);
 }
 
 profileFormSubmit.setEventListeners();
 
-editUser.addEventListener('click', openPopupProfile);
+editUser.addEventListener('click', () => {
+  openPopupProfile();
+  profileFormSubmit.open();
+});
 
 //--------------------------------------------//
 
@@ -79,18 +68,16 @@ function addNewCard(arrayItem, template) {
 const newPhoto = new PopupWithForm(popupMesto, {
   handleFormSubmit: (item) => {
       const newUserCard = addNewCard({name: titleInput.value, link: linkInput.value}, templatePhoto);
-      CardList.addUserItem(newUserCard);
+      cardList.addUserItem(newUserCard);
   }
 })
 
 newPhoto.setEventListeners();
 
-function openPopupMesto() {
+addMesto.addEventListener('click', () => {
   newMestoValidator.toggleButton();
-  openPopup(popupMesto);
-}
-
-addMesto.addEventListener('click', openPopupMesto);
+  newPhoto.open()
+});
 
 //--------------------------------------------//
 
@@ -102,18 +89,14 @@ function openBigPhoto(image, title) {
 
 bigPhoto.setEventListeners()
 
-const CardList = new Section({
+const cardList = new Section({
   items: initialCards,
   renderer: (item) => {
-    const card = new Card(item, templatePhoto, {
-      handleCardClick: (image, title) => {
-        openBigPhoto(image, title);
-      }});
-    const cardElement = card.generateCard();
-    CardList.addItem(cardElement);
+    const defaultCard = addNewCard(item, templatePhoto);
+    cardList.addItem(defaultCard);
   }}, '.photogrid__list');
 
-CardList.renderItems()
+cardList.renderItems()
 
 //--------------------------------------------//
 

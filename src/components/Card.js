@@ -9,12 +9,14 @@ export class Card {
 
   generateCard() {
     this._element = this._getTemplate();
+    this._photoalbumTitle = this._element.querySelector(".photoalbum__title");
+    this._photoalbumImage = this._element.querySelector(".photoalbum__image");
 
     this._setEventListeners();
 
-    this._element.querySelector(".photoalbum__title").textContent = this._title;
-    this._element.querySelector(".photoalbum__image").src = this._image;
-    this._element.querySelector(".photoalbum__image").alt = this._title;
+    this._photoalbumTitle.textContent = this._title;
+    this._photoalbumImage.src = this._image;
+    this._photoalbumImage.alt = this._title;
 
     return this._element;
   }
@@ -53,5 +55,6 @@ export class Card {
 
   _deleteCard() {
     this._element.remove();
+    this._element = null;
   }
 }
