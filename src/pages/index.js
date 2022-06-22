@@ -4,6 +4,8 @@ import { Section } from "../components/Section.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
 import { UserInfo } from "../components/UserInfo.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
+import { Api } from "../components/Api.js";
+import { PopupWithConfirmation } from "../components/PopupWithConfirmation.js";
 
 
 import {
@@ -12,7 +14,6 @@ import {
   jobInput,
   inputUserName,
   inputJobName,
-  initialCards,
   nameUser,
   jobUser,
   editUser,
@@ -24,18 +25,43 @@ import {
   titleInput,
   linkInput,
   templatePhoto,
-  configs
+  configs,
+  popupDel
 } from '../utils/constants.js';
 
 import './index.css'
 
 //--------------------------------------------//
 
+const PopupDeleteCard = new PopupWithConfirmation(popupDel);
+PopupDeleteCard.setEventListeners();
+
+
+
+const api = new Api();
+
+const promises = [api.getDefaultCard(), api.getUserInfo()];
+
+Promise.all(promises)
+  .then(([defaultCard, userInfo]) => {
+    profileInfo.setUserInfo2(userInfo);
+    cardList.renderItems(defaultCard);
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+
 const profileInfo = new UserInfo({userName: nameUser, userJob: jobUser});
 
 const profileFormSubmit = new PopupWithForm(popupProfile, {
   handleFormSubmit: (value) => {
-    profileInfo.setUserInfo(value[inputUserName], value[inputJobName]);
+    api.editUserInfo(value[inputUserName], value[inputJobName])
+    .then((value) => {
+      profileInfo.setUserInfo(value.name, value.about);
+    })
+    .catch((err) => {
+      console.log(err)
+    })
   }
 })
 
@@ -60,15 +86,56 @@ function addNewCard(arrayItem, template) {
   const card = new Card(arrayItem, template, {
     handleCardClick: (image, title) => {
     openBigPhoto(image, title);
-  }});
+  },
+    handleDeleteClick: () => {
+      PopupDeleteCard.open();
+      PopupDeleteCard.handleFormSubmit(() => {
+        api.deleteCard(card.getId())
+          .then((res) => {
+            card.deleteCard()
+            PopupDeleteCard.close()
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      })
+    },
+    handleLikeClick: () => {
+      if(card.isLiked()) {
+        api.removeLike(card.getId())
+          .then((res) => {
+            card.toggleLikeScore(res)
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      } else {
+        api.addLike(card.getId())
+          .then((res) => {
+            card.toggleLikeScore(res)
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      }
+    }
+  });
   const cardElement = card.generateCard();
   return cardElement;
 }
 
+
+
 const newPhoto = new PopupWithForm(popupMesto, {
   handleFormSubmit: (item) => {
-      const newUserCard = addNewCard({name: titleInput.value, link: linkInput.value}, templatePhoto);
-      cardList.addUserItem(newUserCard);
+      api.addUserCard(item)
+        .then((result) => {
+          const newUserCard = addNewCard(result, templatePhoto);
+          cardList.addUserItem(newUserCard);
+        })
+        .catch((err) => {
+          console.log(err)
+        })
   }
 })
 
@@ -90,13 +157,10 @@ function openBigPhoto(image, title) {
 bigPhoto.setEventListeners()
 
 const cardList = new Section({
-  items: initialCards,
   renderer: (item) => {
     const defaultCard = addNewCard(item, templatePhoto);
     cardList.addItem(defaultCard);
   }}, '.photogrid__list');
-
-cardList.renderItems()
 
 //--------------------------------------------//
 

@@ -4,6 +4,7 @@ export const popupPhotoTitle = document.querySelector(".popup__photoalbum-title"
 export const popupPhoto = ".popup_photoalbum";
 export const popupProfile = ".popup_profile";
 export const popupMesto = ".popup_mesto";
+export const popupDel = ".popup_delete-card";
 
 export const nameInput = document.querySelector(".popup__input_type_name");
 export const jobInput = document.querySelector(".popup__input_type_about");

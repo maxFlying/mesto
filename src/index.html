@@ -17,9 +17,9 @@
         <section class="profile">
             <img src="<%=require('./images/profile/image.jpg')%>" alt="Аватарка" class="profile__avatar">
                 <div class="profile__user">
-                    <h2 class="profile__user-name">Жак-Ив Кусто</h2>
+                    <h2 class="profile__user-name">Загрузка...</h2>
                     <button class="profile__user-edit" type="button"></button>
-                    <p class="profile__user-info">Исследователь океана</p>
+                    <p class="profile__user-info">Загрузка...</p>
                 </div>
             <button class="profile__add" type="button"></button>
         </section>
@@ -73,14 +73,25 @@
         </div>
     </div>
 
+    <div class="popup popup_delete-card">
+        <div class="popup__delete-container">
+            <button class="popup__close popup__close_delete" type="button"></button>
+            <h3 class="popup__title">Вы уверены?</h3>
+            <button class="popup__button popup__button_delete" type="submit">Да</button>
+        </div>
+    </div>
+
 
     <template class="template__photoalbum">
         <li class="photoalbum">
-            <button class="photoalbum__delete" type="button"></button>
+            <button class="photoalbum__delete photoalbum__delete_off" type="button"></button>
             <img class="photoalbum__image">
             <div class="photoalbum__description">
                 <h2 class="photoalbum__title"></h2>
-                <button class="photoalbum__like" type="button"></button>
+                <div class="photoalbum__likezone">
+                    <button class="photoalbum__like" type="button"></button>
+                    <div class="photoalbum__like-counter">0</div>
+                </div>
             </div>
         </li>
     </template>
