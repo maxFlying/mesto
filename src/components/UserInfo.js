@@ -6,6 +6,7 @@ export class UserInfo {
 
   getUserInfo() {
     const userData = {
+      id: this._userID,
       name: this._userName.textContent,
       job: this._userJob.textContent,
     };
@@ -18,6 +19,7 @@ export class UserInfo {
   }
 
   setUserInfo2(info) {
+    this._userID = info._id
     this._userName.textContent = info.name;
     this._userJob.textContent = info.about;
   }

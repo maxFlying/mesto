@@ -45,6 +45,7 @@ const promises = [api.getDefaultCard(), api.getUserInfo()];
 Promise.all(promises)
   .then(([defaultCard, userInfo]) => {
     profileInfo.setUserInfo2(userInfo);
+    // console.log(userInfo)
     cardList.renderItems(defaultCard);
   })
   .catch((err) => {
@@ -82,8 +83,8 @@ editUser.addEventListener('click', () => {
 
 //--------------------------------------------//
 
-function addNewCard(arrayItem, template) {
-  const card = new Card(arrayItem, template, {
+function addNewCard(arrayItem, myId, template) {
+  const card = new Card(arrayItem, myId, template, {
     handleCardClick: (image, title) => {
     openBigPhoto(image, title);
   },
@@ -129,8 +130,8 @@ function addNewCard(arrayItem, template) {
 const newPhoto = new PopupWithForm(popupMesto, {
   handleFormSubmit: (item) => {
       api.addUserCard(item)
-        .then((result) => {
-          const newUserCard = addNewCard(result, templatePhoto);
+        .then((res) => {
+          const newUserCard = addNewCard(res, profileInfo.getUserInfo(), templatePhoto);
           cardList.addUserItem(newUserCard);
         })
         .catch((err) => {
@@ -158,7 +159,7 @@ bigPhoto.setEventListeners()
 
 const cardList = new Section({
   renderer: (item) => {
-    const defaultCard = addNewCard(item, templatePhoto);
+    const defaultCard = addNewCard(item, profileInfo.getUserInfo(), templatePhoto);
     cardList.addItem(defaultCard);
   }}, '.photogrid__list');
 
