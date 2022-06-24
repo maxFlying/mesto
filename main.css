@@ -4,7 +4,7 @@
 .header{border-bottom:1px solid rgba(84,84,84,.7);box-sizing:border-box;margin:45px auto 0;min-height:74px}@media screen and (max-width:900px){.header{margin-top:28px;min-height:56px}}
 @media screen and (max-width:900px){.header__logo{height:25px;margin-left:50px;margin-left:27px;width:104px}}
 .profile{align-items:center;display:flex;margin-top:40px}@media screen and (max-width:900px){.profile{margin-left:50px;margin-right:50px}}@media screen and (max-width:700px){.profile{flex-direction:column}}@media screen and (max-width:320px){.profile{margin:42px 19px 0}}
-.profile__avatar{border-radius:50%}
+.profile__avatar{cursor:pointer;position:relative}.profile__avatar:before{background-color:#000;background-image:url(93c771f5f8582261951d.png);background-position:50%;background-repeat:no-repeat;bottom:0;content:"";left:0;position:absolute;right:0;top:0;z-index:-1}.profile__avatar:hover:before{opacity:.8;z-index:0}
 .profile__add{background-color:transparent;background-image:url(d86bb2edc2f6eadb96b7.svg);background-position:50%;background-repeat:no-repeat;border:2px solid #fff;border-radius:2px;box-sizing:border-box;height:50px;margin-left:auto;min-width:150px;padding:0}.profile__add:hover{cursor:pointer;opacity:60%}@media screen and (max-width:768px){.profile__add{margin:0 20px}}@media screen and (max-width:700px){.profile__add{margin:36px 0 0;width:100%}}
 .profile__user{align-items:center;-moz-column-gap:18px;column-gap:18px;display:grid;grid-template-areas:"name name edit" "info info info";padding:0 30px;row-gap:16px}@media screen and (max-width:700px){.profile__user{margin-top:26px;padding-left:0;text-align:center}}@media screen and (max-width:320px){.profile__user{row-gap:14px}}
 .profile__user-name{font-size:42px;font-weight:500;grid-area:name;line-height:1.14;margin:0;overflow:hidden;padding:0;text-overflow:ellipsis;white-space:nowrap}@media screen and (max-width:370px){.profile__user-name{font-size:27px;line-height:1.17}}
@@ -32,8 +32,15 @@
 .popup__photoalbum-image{max-height:75vh;max-width:75vw}
 .popup__photoalbum-title{font-size:12px;font-weight:400;line-height:1.25;margin:10px 0 0}
 .popup_opacity_dark{background-color:rgba(0,0,0,.9)}
-.popup__button_disabled{background-color:#e5e5e5;border:1px solid #000;box-sizing:border-box;color:#000;opacity:.2}
+.popup__button_disabled{background-color:#e5e5e5;border:1px solid #000;box-sizing:border-box;color:#000;cursor:default;opacity:.2}.popup__button_disabled:hover{opacity:.2}
 .popup__input_type_error{border-bottom-color:red}
 .popup__input-error{color:red;font-size:12px;min-height:30px;opacity:0}
 .popup__input-error_active{opacity:1}
+.photoalbum__likezone{align-items:center;display:flex;flex-direction:column}
+.photoalbum__like-counter{color:#000;font-size:13px;font-weight:400;line-height:15.7px;margin-top:3px}
+.popup__delete-container{background-color:#fff;border-radius:10px;display:flex;flex-direction:column;max-width:430px;padding:34px 36px 37px;position:relative;width:100%}
+.popup__button_delete{margin-top:14px}
+.photoalbum__delete_off{display:none}
+.profile__avatar-photo{border-radius:50%;height:120px;width:120px}
+.popup__title_avatar{margin-bottom:54px}
 
