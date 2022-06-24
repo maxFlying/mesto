@@ -3,7 +3,6 @@ export class Card {
     this._data = data;
     this._title = data.name;
     this._image = data.link;
-    this._like = data.likes;
     this._id = data._id;
     this._userId = data.owner._id;
     this._templateSelector = templateSelector;
@@ -11,7 +10,6 @@ export class Card {
     this._handleDeleteClick = handleDeleteClick;
     this._handleLikeClick = handleLikeClick;
     this._myId= myId.id;
-    // console.log(this._myId)
   }
 
   // f7e4050e6c1f99ee34d90013
@@ -20,6 +18,8 @@ export class Card {
     this._element = this._getTemplate();
     this._photoalbumTitle = this._element.querySelector(".photoalbum__title");
     this._photoalbumImage = this._element.querySelector(".photoalbum__image");
+    this._likeScore = this._element.querySelector(".photoalbum__like-counter");
+    this._likeButton = this._element.querySelector(".photoalbum__like");
 
     this._setEventListeners();
     this._setDeleteIcon();
@@ -50,7 +50,6 @@ export class Card {
     this._element
       .querySelector(".photoalbum__like")
       .addEventListener("click", () => {
-        // this._toggleLikeButton(evt)
         this._handleLikeClick();
       });
 
@@ -77,52 +76,21 @@ export class Card {
     return this._id;
   }
 
-  // _toggleLikeButton(evt) {
-  //   evt.target.classList.toggle("photoalbum__like_is-active");
-  // }
-  
-  // isLiked() {
-  //   this._like.find((data) => {
-  //     console.log(data._id)
-  //     if(data._id === this._myId) {
-  //       return true;
-  //     } else {
-  //       return false;
-  //     }
-  //   })
-  // }
-
   isLiked() {
-    return Boolean(this._like.find((data) => {
-      console.log(this._myId)
-      // console.log(data._id)
+    return Boolean(this._data.likes.find((data) => {
       return data._id === this._myId;
     })
   )}
 
   toggleLikeScore(data) {
-    this._data = data;
     this._data.likes = data.likes;
-    this._likeScore = this._element.querySelector(".photoalbum__like-counter");
-    this._likeButton = this._element.querySelector(".photoalbum__like");
-
     this._likeScore.textContent = this._data.likes.length;
 
     if(this.isLiked()) {
-      // console.log(this.isLiked())
       this._likeButton.classList.add("photoalbum__like_is-active");
     } else {
-      // console.log(this.isLiked())
       this._likeButton.classList.remove("photoalbum__like_is-active");
     }
   }
-  
-  // butA() {
-  //   this._likeButton.classList.add("photoalbum__like_is-active");
-  // }
 
-  // butD() {  
-  //   this._likeButton.classList.remove("photoalbum__like_is-active");
-  // }
-  
 }

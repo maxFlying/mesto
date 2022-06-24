@@ -5,6 +5,7 @@ export const popupPhoto = ".popup_photoalbum";
 export const popupProfile = ".popup_profile";
 export const popupMesto = ".popup_mesto";
 export const popupDel = ".popup_delete-card";
+export const popupAvatar = ".popup_avatar"
 
 export const nameInput = document.querySelector(".popup__input_type_name");
 export const jobInput = document.querySelector(".popup__input_type_about");
@@ -17,14 +18,17 @@ export const inputJobName = "input_about";
 
 export const nameUser = document.querySelector(".profile__user-name");
 export const jobUser = document.querySelector(".profile__user-info");
+export const avatarUser = document.querySelector(".profile__avatar-photo");
 
 export const editUser = document.querySelector(".profile__user-edit");
 export const addMesto = document.querySelector(".profile__add");
+export const editAvatar = document.querySelector(".profile__avatar");
 
 
 export const popupProfileForm = document.querySelector(".popup__form_profile");
-
 export const popupMestoForm = document.querySelector(".popup__form_mesto");
+export const popupAvatarForm = document.querySelector(".popup__form_avatar");
+
 export const titleInput = document.querySelector(".popup__input_type_title");
 export const linkInput = document.querySelector(".popup__input_type_link");
 
