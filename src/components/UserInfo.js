@@ -15,18 +15,18 @@ export class UserInfo {
     return userData;
   }
 
-  // setUserInfo1(newName, newJob) {
-  //   this._userName.textContent = newName;
-  //   this._userJob.textContent = newJob;
-  // }
+  setUserInfo(newName, newJob) {
+    this._userName.textContent = newName;
+    this._userJob.textContent = newJob;
+  }
 
-  setUserInfo(info) {
-    this._userID = info._id
-    this._userName.textContent = info.name;
-    this._userJob.textContent = info.about;
+  setUserInfoServer(info) {
+    if(info._id) this._userID = info._id
+    if(info.name) this._userName.textContent = info.name;
+    if(info.about) this._userJob.textContent = info.about;
   }
 
   setUserAvatar(info) {
-    this._userAvatar.src = info.avatar;
+    if(info.avatar) this._userAvatar.src = info.avatar;
   }
 }

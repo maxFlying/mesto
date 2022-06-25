@@ -6,8 +6,8 @@ export class PopupWithConfirmation extends Popup {
     this._deleteButton = this._popup.querySelector(".popup__button_delete");
   }
 
-  handleFormSubmit(fn) {
-    this._functionDelete = fn;
+  handleFormSubmit(callback) {
+    this._functionDelete = callback;
   }
 
   setEventListeners() {

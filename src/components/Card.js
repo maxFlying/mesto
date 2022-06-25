@@ -12,8 +12,6 @@ export class Card {
     this._myId= myId.id;
   }
 
-  // f7e4050e6c1f99ee34d90013
-
   generateCard() {
     this._element = this._getTemplate();
     this._photoalbumTitle = this._element.querySelector(".photoalbum__title");
