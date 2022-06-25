@@ -52,7 +52,7 @@ const promises = [api.getDefaultCard(), api.getUserInfo()];
 
 Promise.all(promises)
   .then(([defaultCard, userInfo]) => {
-    profileInfo.setUserInfoServer(userInfo);
+    profileInfo.setUserInfo(userInfo);
     profileInfo.setUserAvatar(userInfo)
     cardList.renderItems(defaultCard);
   })
@@ -67,8 +67,7 @@ const profileFormSubmit = new PopupWithForm(popupProfile, {
     handleLoading(popupProfile, true);
     api.editUserInfo(value[inputUserName], value[inputJobName])
     .then((value) => {
-      profileInfo.setUserInfoServer(value.name, value.about);
-      profileInfo.setUserInfo(value.name, value.about)
+      profileInfo.setUserInfo(value);
       profileFormSubmit.close();
     })
     .catch((err) => {
